@@ -1,6 +1,8 @@
 package com.luaforge.studio.ui.editor.viewmodel
 
+import android.graphics.Paint
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -650,6 +652,21 @@ class EditorViewModel : ViewModel(), CompletionDataManager.OnCompletionDataListe
             )
             setText(state.content)
             setTextSizePx(45f)
+            
+            setLineNumberAlign(Paint.Align.CENTER)
+            lineNumberMarginLeft = 0f
+            isDisplayLnPanel = false
+            setHardwareAcceleratedDrawAllowed(true)
+            isCursorAnimationEnabled = false
+            isStickyTextSelection = true
+            isVerticalScrollBarEnabled = true
+            val density = context.resources.displayMetrics.density
+            verticalScrollbarThumbDrawable = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadius = 8f * density
+                setColor(Color.Transparent.copy(alpha = 0.2f).toArgb())
+            }
+            
             isHorizontalScrollBarEnabled = false
             tabWidth = 4
             isWordwrap = false
